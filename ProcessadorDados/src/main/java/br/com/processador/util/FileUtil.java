@@ -18,16 +18,13 @@ public class FileUtil {
 
 	public static List<File> allFilesDat(String dir, String tipo){
 		List<File> arquivosProcessamento = new ArrayList<File>();
-		
 		File diretorio = new File(dir);
 		File [] arquivos = diretorio.listFiles();
-		
 		for (File file : arquivos) {			
 			if(Files.getFileExtension(file.getName()).equals(tipo)){
 				arquivosProcessamento.add(file);
 			}
 		}
-		
 		return arquivosProcessamento;
 	}
 	
@@ -37,7 +34,6 @@ public class FileUtil {
 		if(!path.exists()) {
 			path.mkdirs();
 		}
-		
 		File arquivo = new File(caminhoArquivo);
 		FileWriter gravar;
 		try {

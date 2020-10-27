@@ -19,10 +19,7 @@ import org.hibernate.annotations.Parameter;
 @Entity
 @Table(name = "TB_VENDEDOR")
 public class Vendedor implements Serializable{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -6888172296492285096L;
 	
 	@Id
@@ -51,7 +48,6 @@ public class Vendedor implements Serializable{
 	@Digits(integer = 12, fraction = 2)
 	@Column(name = "VL_SALARIO")	
 	private BigDecimal salary;
-	
 
 	public String getCPF() {
 		return CPF;
@@ -92,5 +88,4 @@ public class Vendedor implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-
 }

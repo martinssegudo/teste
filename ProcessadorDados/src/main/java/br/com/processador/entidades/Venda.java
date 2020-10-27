@@ -23,9 +23,6 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "TB_VENDA")
 public class Venda implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3463681128816103294L;
 
 	@Id
@@ -73,6 +70,4 @@ public class Venda implements Serializable {
 	public void setIdVenda(String idVenda) {
 		this.idVenda = idVenda;
 	}
-	
-
 }

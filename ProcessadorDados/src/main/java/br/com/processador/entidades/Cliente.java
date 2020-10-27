@@ -42,14 +42,11 @@ public class Cliente implements Serializable{
 	@Transient
 	private String id;
 	
-	
 	@Column(name = "DS_CNPJ")
 	private String CNPJ;
 	
 	@Column(name = "DS_AREA_ATUACAO")
 	private String busArea;
-
-	
 
 	public String getBusArea() {
 		return busArea;

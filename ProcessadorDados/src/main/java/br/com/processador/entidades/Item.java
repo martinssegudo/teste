@@ -90,7 +90,6 @@ public class Item implements Serializable {
 		this.idVenda = idVenda;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

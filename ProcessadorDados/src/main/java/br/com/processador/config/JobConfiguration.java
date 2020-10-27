@@ -54,13 +54,8 @@ public class JobConfiguration {
     private ProcessadorVenda processadorVenda;
     private ProcessadorItem processadorItem;
     
-    
-    
-    
     @Value("file:${data.in}")
     private String path;
-    
- 
     
     @Autowired
     public JobConfiguration(JobBuilderFactory jobBuilderFactory,
@@ -78,7 +73,6 @@ public class JobConfiguration {
     	this.processadorCliente = processadorCliente;
     	this.processadorItem = processadorItem;
     }
-    
    
     @Bean
     public Job processamentoArquivo() throws Exception { 
@@ -90,7 +84,6 @@ public class JobConfiguration {
     			.build();
     }
     
-    
     @Bean
 	public Step stepCliente() throws Exception { 
 		return this.stepBuilderFactory.get("Processamento cliente")
@@ -101,7 +94,6 @@ public class JobConfiguration {
 				.build();
 	}
    
-    
     @Bean
     public Step stepVendedor() throws Exception { 
     	return this.stepBuilderFactory.get("Processamento vendedor")
@@ -132,7 +124,6 @@ public class JobConfiguration {
     			.build();
     }
 
-    
     @Bean
     @StepScope
 	public MultiResourceItemReader<LinhaDTO> multiResourceItemreader() {        
@@ -150,7 +141,6 @@ public class JobConfiguration {
 		reader.setDelegate(readerItem());	
 		return reader;
 	}
-    
      
     @Bean  
     @StepScope
@@ -166,7 +156,6 @@ public class JobConfiguration {
         });
         return reader;
     }
-       
     
     @Bean
     public JdbcBatchItemWriter<Cliente> writeClientDB(){
@@ -185,7 +174,6 @@ public class JobConfiguration {
     	write.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Cliente>());
     	return write;
     }   
-   
     
     @Bean
     public JdbcBatchItemWriter<Vendedor> writeVendedorDB(){
@@ -197,14 +185,12 @@ public class JobConfiguration {
     	sb.append(" NEXT VALUE FOR SEQ_VENDEDOR, ");
     	sb.append(":name, :CPF, :salary )");
     	
-    	
     	JdbcBatchItemWriter<Vendedor> write = new JdbcBatchItemWriter<Vendedor>();
     	write.setDataSource(source);
     	write.setSql(sb.toString());    	
     	write.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Vendedor>());
     	return write;
     }  
-    
     
     @Bean
     public JdbcBatchItemWriter<Venda> writeVendaDB(){
@@ -216,20 +202,15 @@ public class JobConfiguration {
     	sb.append(" NEXT VALUE FOR SEQ_VENDEDOR, ");
     	sb.append(":vendedor, :idVenda )");
     	
-    	
     	JdbcBatchItemWriter<Venda> write = new JdbcBatchItemWriter<Venda>();
     	write.setDataSource(source);
     	write.setSql(sb.toString());    	    	
     	write.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Venda>());    	
     	return write;
     }
-    
        
     public ItemWriter<Set<Item>> writeItensDB(){
     	MultiOutputItemWriterItem itens = new MultiOutputItemWriterItem(source);
     	return itens;
     }
-    
-    
-    
 }

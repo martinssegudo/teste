@@ -13,18 +13,21 @@ public class ProcessadorCliente implements ItemProcessor<LinhaDTO, Cliente>{
 	@Override
 	public Cliente process(LinhaDTO linha) throws Exception {
 		if(linha.getId().equals(TipoEnum.CLIENTE.getCod())) {
-			Cliente cliente = new Cliente();
-			
-			cliente.setId(linha.getId());
-			cliente.setCNPJ(linha.getP1());
-			cliente.setName(linha.getP2());
-			cliente.setBusArea(linha.getP3());
-			
-			return cliente;
+			return montaCliente(linha);
 		}
 		return null;
 	}
 
+	private Cliente montaCliente(LinhaDTO linha) {
+		Cliente cliente = new Cliente();
+		
+		cliente.setId(linha.getId());
+		cliente.setCNPJ(linha.getP1());
+		cliente.setName(linha.getP2());
+		cliente.setBusArea(linha.getP3());
+		
+		return cliente;
+	}
 	 
 	
 }

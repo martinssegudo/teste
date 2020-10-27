@@ -68,12 +68,8 @@ public class ScheduledConfig {
 	
 	@Scheduled(fixedDelay = 60000)
 	public void teste() throws Exception{		
-		//this.limpaBanco();
 		List<File> arquivos = FileUtil.allFilesDat(pathDataIn, fileDataInSufix);
-		
-		
 		lauch.runBatchJob();
-	    	
 		FileUtil.gravarAquirvo(fileDataOutSufix,pathDataOut+new Date().getTime()+"."+fileDataOutSufix, dadosGravacao());	    			
 		FileUtil.modificarNomeArquivosProcessador(arquivos, fileDataInSufix, fileDataProcSufix);
 		

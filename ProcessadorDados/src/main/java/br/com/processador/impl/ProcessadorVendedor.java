@@ -15,16 +15,20 @@ public class ProcessadorVendedor implements ItemProcessor<LinhaDTO, Vendedor>{
 	@Override
 	public Vendedor process(LinhaDTO linha) throws Exception {
 		if(linha.getId().contentEquals(TipoEnum.VENDEDOR.getCod())) {
-			Vendedor vendedor = new Vendedor();
-			
-			vendedor.setId(linha.getId());
-			vendedor.setCPF(linha.getP1());
-			vendedor.setName(linha.getP2());
-			vendedor.setSalary(new BigDecimal(linha.getP3()));
-			
-			return vendedor;
+			return montaVendedor(linha);
 		}
 		return null;
+	}
+	
+	private Vendedor montaVendedor(LinhaDTO linha) {
+		Vendedor vendedor = new Vendedor();
+		
+		vendedor.setId(linha.getId());
+		vendedor.setCPF(linha.getP1());
+		vendedor.setName(linha.getP2());
+		vendedor.setSalary(new BigDecimal(linha.getP3()));
+		
+		return vendedor;
 	}
 
 }

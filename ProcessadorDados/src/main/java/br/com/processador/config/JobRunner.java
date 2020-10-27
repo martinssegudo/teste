@@ -18,9 +18,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JobRunner {
-    
-
-
     private JobLauncher laucher;
     private Job job;
 
@@ -30,14 +27,12 @@ public class JobRunner {
         this.job = demo1;
     }
 
-
     @Async
     public void runBatchJob() {
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
         jobParametersBuilder.addDate("date", new Date(), true);
         runJob(job, jobParametersBuilder.toJobParameters());
     }
-
 
     public void runJob(Job job, JobParameters parameters) {
         try {
@@ -52,7 +47,5 @@ public class JobRunner {
         	e.printStackTrace();
         }
     }
-
-
 }
 
