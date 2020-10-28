@@ -1,4 +1,4 @@
-package br.com.processador.rservices;
+package br.com.processador.services;
 
 import java.math.BigDecimal;
 

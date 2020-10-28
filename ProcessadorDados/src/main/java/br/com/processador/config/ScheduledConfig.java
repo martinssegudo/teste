@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import br.com.processador.rservices.ClienteService;
-import br.com.processador.rservices.ItemService;
-import br.com.processador.rservices.VendaService;
-import br.com.processador.rservices.VendedorService;
+import br.com.processador.services.ClienteService;
+import br.com.processador.services.ItemService;
+import br.com.processador.services.VendaService;
+import br.com.processador.services.VendedorService;
 import br.com.processador.util.FileUtil;
 
 @Configuration
@@ -67,15 +67,15 @@ public class ScheduledConfig {
 	
 	
 	@Scheduled(fixedDelay = 60000)
-	public void teste() throws Exception{		
+	public void startProcessamentoArquivos() throws Exception{		
 		List<File> arquivos = FileUtil.allFilesDat(pathDataIn, fileDataInSufix);
 		lauch.runBatchJob();
-		FileUtil.gravarAquirvo(fileDataOutSufix,pathDataOut+new Date().getTime()+"."+fileDataOutSufix, dadosGravacao());	    			
+		FileUtil.gravarAquirvo(fileDataOutSufix,pathDataOut+new Date().getTime()+"."+fileDataOutSufix, MontaDadosGravacao());	    			
 		FileUtil.modificarNomeArquivosProcessador(arquivos, fileDataInSufix, fileDataProcSufix);
-		
+		limpaBanco();
 	}
 	
-	private StringBuilder dadosGravacao() {
+	private StringBuilder MontaDadosGravacao() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(clienteService.contagemClientes()+",");
 		sb.append(vendedorService.contagemVendedores()+",");

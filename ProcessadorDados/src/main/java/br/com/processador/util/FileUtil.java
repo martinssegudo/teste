@@ -30,10 +30,7 @@ public class FileUtil {
 	
 	
 	public static void gravarAquirvo(String caminho, String caminhoArquivo, StringBuilder dados) {
-		File path = new File(caminho);
-		if(!path.exists()) {
-			path.mkdirs();
-		}
+		criaDiretorio(caminho);
 		File arquivo = new File(caminhoArquivo);
 		FileWriter gravar;
 		try {
@@ -49,6 +46,13 @@ public class FileUtil {
 		}	
 	}
 	
+	private static void criaDiretorio(String caminho) {
+		File path = new File(caminho);
+		if(!path.exists()) {
+			path.mkdirs();
+		}
+	}
+	
 	
 	public static void modificarNomeArquivosProcessador(List<File> arquivos, String sufixoDat, String sufixoProc) {
 		if(arquivos != null
@@ -56,21 +60,24 @@ public class FileUtil {
 			arquivos.forEach(
 					arquivo -> {								
 						try {
-							File mov = new File(arquivo.getAbsolutePath().replace("."+sufixoDat,"."+sufixoProc));
-							int count = 0;
-							while(mov.exists()) {
-								count++;
-								String [] nome  = mov.getAbsolutePath().split(".");
-								mov = new File(nome[0]+count+"."+nome[1]);
-							}
-							
-							FileUtils.moveFile(arquivo, mov);
+							renomeiaArquivo(arquivo, sufixoDat, sufixoProc);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}	
 					}
 				);
+		}	
+	}
+	
+	private static void renomeiaArquivo(File arquivo, String sufixoDat, String sufixoProc) throws IOException {
+		File mov = new File(arquivo.getAbsolutePath().replace("."+sufixoDat,"."+sufixoProc));
+		int count = 0;
+		while(mov.exists()) {
+			count++;
+			String [] nome  = mov.getAbsolutePath().split(".");
+			mov = new File(nome[0]+count+"."+nome[1]);
 		}
 		
+		FileUtils.moveFile(arquivo, mov);
 	}
 }
